@@ -11,8 +11,8 @@ Call of duty warzone Bot, it shows the statistics of a player and the data relat
 ## Commands
 - !stats yourname
 - !match yourname
-![stats](https://github.com/Ste29/CoddarielloBot/blob/main/img/bot1.jpg)
+![stats](https://github.com/Ste29/CoddarielloBot/blob/main/img/bot1.jpg | height=50)
 - !credits
 - !help
 - !graph yourname
-![graph](https://github.com/Ste29/CoddarielloBot/blob/main/img/bot2.jpg)
+![graph](https://github.com/Ste29/CoddarielloBot/blob/main/img/bot2.jpg | height=50)
