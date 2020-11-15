@@ -6,7 +6,7 @@
 
 
 ## General info
-Call of duty warzone Bot, it shows the statistics of a player and the data related to its games
+Call of duty warzone Bot, it shows the statistics of a player and the data related to its games. The bot is currently hosted on heroku and you can try it any time.
 	
 ## Commands
 - !stats yourname
