@@ -40,10 +40,19 @@ class telegram_interface(telepot.aio.helper.ChatHandler):
         if command[0] == "!stats":
             player_name = self.getName(command[1:])
             try:
-                output, _ = await self.codapi.searchPlayer(player_name)
+                output, _ = await self.codapi.statsPlayer(player_name)
             except ValueError:
-                output = await self.codapi.searchPlayer(player_name)
+                output = await self.codapi.statsPlayer(player_name)
             await self.printer(output)
+
+        elif command[0] == "!weekly":
+            player_name = self.getName(command[1:])
+            try:
+                output, _ = await self.codapi.weeklyPlayer(player_name)
+            except ValueError:
+                output = await self.codapi.weeklyPlayer(player_name)
+            await self.printer(output)
+
 
         elif command[0] == "!match":
             player_name = self.getName(command[1:])
@@ -56,17 +65,31 @@ class telegram_interface(telepot.aio.helper.ChatHandler):
             await self.printer(output)
 
         elif command[0] == "!help":
-            output = ["Bot creato per vedere le stats su cod warzone:\n\n" \
-                     "!stats iltuonick -> Le tue statistiche\n" \
-                     "!match iltuonick -> Il tuo ultimo game\n" \
-                     "!credits -> Il creatore del bot\n\n" \
-                     "Se ci sono problemi controlla il nick e il tag activision oppure contattami"]
+            output = ["Bot creato per vedere le stats su cod warzone:\n\n"
+                      "!stats iltuonick -> Le tue statistiche\n"
+                      "!weekly iltuonick -> Le tue statistiche settimanali\n"
+                      "!match iltuonick -> Il tuo ultimo game\n"
+                      "!graph iltuonick N -> Grafico del rateo sui tuoi ultimi game, puoi decidere quanti game "
+                      "visualizzare nel grafico scegliendo N compreso tra 10 e 20\n"
+                      "!credits -> Il creatore del bot\n\n"
+                      "Se ci sono problemi controlla il nick e il tag activision oppure contattami"]
             await self.printer(output)
 
         elif command[0] == "!graph":
-            player_name = self.getName(command[1:])
-            await self.codapi.graph(player_name)
+            try:
+                limit = int(command[-1])
+                player_name = self.getName(command[1:-1])
+            except ValueError:
+                player_name = self.getName(command[1:])
+
+            try:
+                output = await self.codapi.graph(player_name, limit)
+            except NameError:
+                output = await self.codapi.graph(player_name)
             currentDirectory = os.getcwd()
             dirphoto = os.path.join(currentDirectory, "kd.png")
-            await self.sender.sendPhoto(photo=open(dirphoto, "rb"))
-            os.remove(dirphoto)
+            try:
+                await self.sender.sendPhoto(photo=open(dirphoto, "rb"))
+                os.remove(dirphoto)
+            except FileNotFoundError:
+                await self.printer(output)

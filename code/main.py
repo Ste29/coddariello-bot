@@ -6,7 +6,7 @@ from telepot.aio.delegate import pave_event_space, per_chat_id, create_open
 from telegram_interface import *
 
 
-token = "yourtoken"
+token = "1437760584:AAErdX3pG9IWWtuzzsCADdWnaandfyZsGCQ"
 bot = telepot.aio.DelegatorBot(token, [
     pave_event_space()(
         per_chat_id(), create_open, telegram_interface, timeout=10),
