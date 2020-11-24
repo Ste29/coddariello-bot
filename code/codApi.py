@@ -7,8 +7,8 @@ import numpy as np
 
 class codApi():
     def __init__(self):
-        self.email = "stefanovillata@hotmail.it"
-        self.psw = "Facile.Bot1"
+        self.email = "youremail@email.it"
+        self.psw = "psw"
 
     async def logger(self):
         self.client = await callofduty.Login(self.email, self.psw)

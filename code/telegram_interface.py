@@ -84,7 +84,7 @@ class telegram_interface(telepot.aio.helper.ChatHandler):
 
             try:
                 output = await self.codapi.graph(player_name, limit)
-            except NameError:
+            except UnboundLocalError:
                 output = await self.codapi.graph(player_name)
             currentDirectory = os.getcwd()
             dirphoto = os.path.join(currentDirectory, "kd.png")
